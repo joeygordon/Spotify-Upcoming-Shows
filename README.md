@@ -1,6 +1,6 @@
-# spotify
+# Spotify Favorites' Upcoming Shows
 
-> A Vue.js project
+An experiment with the Spotify API. Find the upcoming tour dates of your favorite artists. See it online at [joeygordon.com/spotify](http://www.joeygordon.com/spotify)
 
 ## Build Setup
 
