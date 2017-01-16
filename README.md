@@ -1,6 +1,6 @@
 # Spotify Favorites' Upcoming Shows
 
-An experiment with the Spotify API. Uses the API to determine your favorite artists and then finds their upcoming tour dates. See it online at [joeygordon.com/spotify](http://www.joeygordon.com/spotify)
+An experiment with the Spotify API. Uses the API to determine your favorite artists and then finds their upcoming tour dates. Built in Vue.js. See it online at [joeygordon.com/spotify](http://www.joeygordon.com/spotify)
 
 ## Build Setup
 
