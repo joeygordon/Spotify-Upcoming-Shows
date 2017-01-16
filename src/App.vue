@@ -1,25 +1,29 @@
 <template>
   <div id="app">
-    <h1>{{ msg }}</h1>
-    <profile v-if="loggedin" v-bind:token="token"></profile>
+    <div class="main-header">
+      <h1>Upcoming Shows</h1>
+    </div>
+    
+    <profile v-if="loggedIn" v-bind:token="token"></profile>
     <login v-else></login>
   </div>
 </template>
 
 <script>
+//spotify api
 var Spotify = require('spotify-web-api-js');
 var s = new Spotify();
 
-// localStorage persistence
-var STORAGE_KEY = 'spotify-api-example'
+// setup local storage
+var storage_key = 'spotify-api-example'
 var authTokenStorage = {
   fetch: function () {
-    var token = localStorage.getItem(STORAGE_KEY) || 'undefined'
+    var token = localStorage.getItem(storage_key) || 'undefined'
     return token
   },
   save: function (token) {
     var time = new Date();
-    localStorage.setItem(STORAGE_KEY, JSON.stringify({token: token, time: time}))
+    localStorage.setItem(storage_key, JSON.stringify({token: token, time: time}))
   }
 }
 
@@ -29,37 +33,31 @@ export default {
     return {
       token: authTokenStorage.fetch(),
       stateKey: 'spotify_auth_state',
-      msg: 'Upcoming Shows',
-      loggedin: false
+      loggedIn: false
     }
   },
-
-  // created methods
   created:function(){
     var params = this.getHashParams();
-
+    //see if we have any url parameters
     if (Object.keys(params).length != 0){
       var access_token = params.access_token,
           state = params.state,
           storedState = localStorage.getItem(this.stateKey);
 
       this.token = access_token;
-      this.loggedin = true;
+      this.loggedIn = true;
+      window.location = '/'
     }else{
-      var ONE_HOUR = 60 * 60 * 1000;
+      var time_limit = 60 * 10 * 1000;
 
       if (this.token != 'undefined') {
         var token_data = JSON.parse(this.token);
       }
-      // console.log("HEY", new Date());
-      // console.log("HEY", new Date(token_data['time']));
-      // check for login
-      if (this.token != 'undefined' && ((new Date) - new Date(token_data['time'])) < ONE_HOUR ) {
-        this.loggedin = true;
-      } 
 
+      if (this.token != 'undefined' && ((new Date) - new Date(token_data['time'])) < time_limit ) {
+        this.loggedIn = true;
+      } 
     }
-    // console.log("TOKEN", this.token)
   },
   methods: {
     getHashParams: function() {
@@ -83,39 +81,42 @@ export default {
 }
 </script>
 
-<style>
-html{
-  margin: 0px;
-  padding: 0px;
-  height: 100%;
-}
-body {
-  padding: 0;
-  margin: 0;
-  background-image: url(https://unsplash.it/1920/1080/?random);
-  background-size: cover;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-}
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  /*-webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;*/
-  text-align: center;
-  color: #FFF;
-  margin-top: 60px;
-}
+<style lang="sass">
+html
+  margin: 0px
+  padding: 0px
+  height: 100%
 
-h1, h2 {
-  font-weight: normal;
-}
+body 
+  padding: 0
+  margin: 0
+  background-color: #EEE
+  padding-bottom: 60px
 
-ul {
-  list-style-type: none;
-  padding: 0;
-}
+#app
+  font-family: 'Avenir', Helvetica, Arial, sans-serif
+  color: #333
+  max-width: 1300px
+  margin: 0 auto
 
-a {
-  color: coral;
-}
+h1, h2 
+  font-weight: normal
+
+ul
+  list-style-type: none
+  padding: 0
+
+a 
+  color: #62D36E
+
+.cf:after
+  content: ""
+  display: table
+  clear: both
+
+.main-header
+  padding: 2em 2rem
+  border-bottom: 1px solid #EEE
+  display: none
+
 </style>

@@ -21,10 +21,11 @@
     "file-loader": "^0.9.0",
     "json": "^9.0.4",
     "jsonp": "^0.2.1",
+    "node-sass": "^4.3.0",
+    "sass-loader": "^4.1.1",
     "spotify-web-api-js": "^0.21.2",
     "vue-loader": "^10.0.0",
     "vue-template-compiler": "^2.1.0",
-    "watson-developer-cloud": "^2.14.6",
     "webpack": "^2.1.0-beta.25",
     "webpack-dev-server": "^2.1.0-beta.9"
   }
