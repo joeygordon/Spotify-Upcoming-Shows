@@ -60,5 +60,6 @@ export default {
 	.artist-item
 		width: 95%
 		float: none
+		margin: 1rem auto
 
 </style>

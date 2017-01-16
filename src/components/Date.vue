@@ -52,4 +52,13 @@ export default {
   &:hover
     background-color: #377D3E
 
+@media (max-width: 750px)
+  .date-info
+    float: none
+    width: 100%
+
+  .date-links
+    float: none
+    width: 100%
+    text-align: left
 </style>
